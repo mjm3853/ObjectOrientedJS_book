@@ -4,3 +4,4 @@ function reflect(value) {
 
 console.log(reflect('poopy'));
 console.log(typeof reflect);
+
