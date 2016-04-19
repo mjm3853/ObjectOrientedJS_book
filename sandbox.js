@@ -2,6 +2,7 @@ var spacer = "-----------------";
 
 //------------------------------------
 console.log(spacer);
+//------------------------------------
 
 function reflect(value) {
     return value;
@@ -10,8 +11,9 @@ function reflect(value) {
 console.log(reflect('reflect'));
 console.log(typeof reflect);
 
-//--------------------------------
+//------------------------------------
 console.log(spacer);
+//------------------------------------
 
 var numbers = [1, 5, 8, 4, 7, 10, 2, 6];
 
@@ -27,8 +29,9 @@ numbers.sort();
 
 console.log(numbers);
 
-//---------------------------------------
+//------------------------------------
 console.log(spacer);
+//------------------------------------
 
 var person1 = {
     name: "Matt"
@@ -52,8 +55,9 @@ var reliableOwnCheck = person1.hasOwnProperty("age");
 
 console.log("boolean response of reliably checking own property in object: ", reliableCheck)
 
-//-------------------------------------------
+//------------------------------------
 console.log(spacer);
+//------------------------------------
 
 //for when you do not need the properties in an array
 var property;
@@ -75,5 +79,30 @@ for (var i = 0, len = properties.length; i < len; i++){
     console.log("Property array value: " + person1[properties[i]]);
 }
 
-//-------------------------------------------
+//------------------------------------
 console.log(spacer);
+//------------------------------------
+
+var person2 = {
+    //underscore indicates a property to be handled as private even though it is not really
+    _name: "Renee",
+    
+    //accessor property get
+    get name() {
+        console.log("Reading name");
+        return this._name;
+    },
+    
+    //accessor property set
+    set name(value) {
+        console.log("Setting name to %s", value);
+        this._name = value;
+    }
+};
+
+//get name
+console.log(person2.name);
+
+//set name
+person2.name = "Greg";
+console.log(person2.name);
