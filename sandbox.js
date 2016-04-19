@@ -16,9 +16,23 @@ numbers.sort(function (first, second) {
 
 console.log(numbers);
 
-//--------------------
-
 //default sort does not work because it treats items as strings
 numbers.sort();
 
 console.log(numbers);
+
+//---------------------------------------
+
+var person1 = {
+    name: "Matt"
+};
+
+person1.age = "Redacted";
+
+//unreliable since this evaluates truthy vs falsy 
+if (person1.age){
+    console.log(person1.age)
+}
+    
+//more reliable
+console.log("age" in person1);
