@@ -108,3 +108,32 @@ console.log(person2.name);
 //set name
 person2.name = "Greg";
 console.log(person2.name);
+
+//------------------------------------
+console.log(spacer);
+//------------------------------------
+
+//Constructors - function used with new to create an object. 
+//Makes it easy to create similar objects with the same properties and methods
+
+function Person(soundSomeoneMakesWhenTheyCallYou) {
+    //Capital function name indicates constructor
+    this.soundSomeoneMakesWhenTheyCallYou = soundSomeoneMakesWhenTheyCallYou;
+    this.sayCallSound = function() {
+        console.log("Hey", this.soundSomeoneMakesWhenTheyCallYou);
+    }
+    this.insult = function() {
+        console.log(this.soundSomeoneMakesWhenTheyCallYou + " you are a buttface.")
+    }
+}
+
+console.log("is the object person1 and instance of the Person constructor?: " + (person1 instanceof Person));
+
+var leonardo = new Person("Leonardo");
+
+console.log("is the object leonardo and instance of the Person constructor?: " + (leonardo instanceof Person));
+console.log("was leonardo created by the Person constructor?: " + (leonardo.constructor === Person));
+
+leonardo.sayCallSound();
+leonardo.insult();
+
