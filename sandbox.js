@@ -137,3 +137,27 @@ console.log("was leonardo created by the Person constructor?: " + (leonardo.cons
 leonardo.sayCallSound();
 leonardo.insult();
 
+//------------------------------------
+console.log(spacer);
+//------------------------------------
+
+//Prototypes!
+
+var testShow = {};
+
+var prototype = Object.getPrototypeOf(testShow);
+
+console.log(prototype === Object.prototype);
+
+function TVShow(name) {
+    this.name = name;
+}
+
+TVShow.prototype.sayName = function() {
+    console.log("TV Show name is: " + this.name);
+};
+
+var modernFamily = new TVShow("Modern Family");
+
+modernFamily.sayName();
+
