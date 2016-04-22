@@ -147,17 +147,44 @@ var testShow = {};
 
 var prototype = Object.getPrototypeOf(testShow);
 
-console.log(prototype === Object.prototype);
+console.log("Check for prototype: " + (prototype === Object.prototype));
 
+//Constructor - which will have prototype methods and attributes
 function TVShow(name) {
     this.name = name;
 }
 
+/* Remove for refactor
 TVShow.prototype.sayName = function() {
     console.log("TV Show name is: " + this.name);
+};
+
+// Remove for refactor
+TVShow.prototype.characters = [];
+*/
+
+//Refactor of sayName, characters, and toString
+
+TVShow.prototype = {
+    constructor: TVShow,
+    
+    sayName: function() {
+        console.log("TV Show name is: " + this.name);
+    },
+    
+    characters: [],
+    
+    toString: function(){
+        return "[TV Show - " + this.name + "]";
+    }
 };
 
 var modernFamily = new TVShow("Modern Family");
 
 modernFamily.sayName();
 
+modernFamily.characters.push("Phil Dunphy");
+
+console.log(modernFamily.characters);
+
+console.log(modernFamily.toString());
