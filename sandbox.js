@@ -143,6 +143,10 @@ console.log(spacer);
 
 //Prototypes!
 
+function hasPrototypeProperty(object, name){
+    return name in object && !object.hasOwnProperty(name);
+}
+
 var testShow = {};
 
 var prototype = Object.getPrototypeOf(testShow);
@@ -189,4 +193,18 @@ console.log(modernFamily.characters);
 
 console.log(modernFamily.toString());
 
-//test change for git
+console.log("Has Prototype property, should be false: " + hasPrototypeProperty(modernFamily, "Modern Family"));
+
+console.log("Has Prototype property, should be true: " + hasPrototypeProperty(modernFamily, "sayName"));
+
+//-----------------------
+
+TVShow.prototype.sayHi = function(){
+    console.log("Hi");
+}
+
+modernFamily.sayHi();
+
+//------------------------------------
+console.log(spacer);
+//------------------------------------
