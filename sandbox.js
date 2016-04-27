@@ -208,3 +208,14 @@ modernFamily.sayHi();
 //------------------------------------
 console.log(spacer);
 //------------------------------------
+
+// Inheritance
+
+//Naked Object has no prototype chain.
+//Removes naming collision possibilities.
+//Good for lookup hash.
+
+var nakedObject = Object.create(null);
+
+//---------------------------------------
+
