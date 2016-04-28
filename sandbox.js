@@ -268,3 +268,15 @@ console.log(spacer);
 
 // Ch6. Object Patterns
 
+//Why make a property private? - To manage state without worrying about the value changing without object's knowledge.
+
+//The Module Pattern
+//- To create Singleton Objects with Private Data
+
+var modulePatternObject = (function(){
+   //private data variables
+   
+   return {
+       //public methods and properties
+   } 
+});
