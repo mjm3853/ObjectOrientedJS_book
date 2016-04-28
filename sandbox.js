@@ -208,3 +208,52 @@ modernFamily.sayHi();
 //------------------------------------
 console.log(spacer);
 //------------------------------------
+
+// Inheritance
+
+//Naked Object has no prototype chain.
+//Removes naming collision possibilities.
+//Good for lookup hash.
+
+var nakedObject = Object.create(null);
+
+//---------------------------------------
+
+// overwrite the prototype chain
+
+function Rectangle(length, width){
+    this.length = length;
+    this.width = width;
+}
+
+var testRect = new Rectangle(3, 4);
+
+console.log("Test Rectangle: " + JSON.stringify(testRect));
+
+Rectangle.prototype.getArea = function() {
+    return this.length * this.width;
+}
+
+console.log("Area of Test Rectangle: " + testRect.getArea());
+
+Rectangle.prototype.toString = function() {
+    return "[Rectangle " + this.length + "x" + this.width + "]";
+}
+
+console.log(testRect.toString());
+
+//--------------------
+
+function Square(side) {
+    this.length = side;
+    this.width = side;
+}
+
+Square.prototype = new Rectangle();
+Square.prototype.constructor = Square;
+
+var testSquare = new Square(5);
+
+console.log("Test Square: " + JSON.stringify(testSquare));
+
+console.log("Area of Test Square: " + testSquare.getArea());
