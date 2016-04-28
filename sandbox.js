@@ -113,7 +113,7 @@ console.log(person2.name);
 console.log(spacer);
 //------------------------------------
 
-//Constructors - function used with new to create an object. 
+//Ch 3. Constructors - function used with new to create an object. 
 //Makes it easy to create similar objects with the same properties and methods
 
 function Person(soundSomeoneMakesWhenTheyCallYou) {
@@ -141,7 +141,7 @@ leonardo.insult();
 console.log(spacer);
 //------------------------------------
 
-//Prototypes!
+//Ch4. Prototypes!
 
 function hasPrototypeProperty(object, name){
     return name in object && !object.hasOwnProperty(name);
@@ -209,7 +209,7 @@ modernFamily.sayHi();
 console.log(spacer);
 //------------------------------------
 
-// Inheritance
+// Ch5. Inheritance
 
 //Naked Object has no prototype chain.
 //Removes naming collision possibilities.
@@ -257,3 +257,14 @@ var testSquare = new Square(5);
 console.log("Test Square: " + JSON.stringify(testSquare));
 
 console.log("Area of Test Square: " + testSquare.getArea());
+
+console.log("Is Square an instance of Rectangle?: " + (testSquare instanceof Rectangle));
+
+//Inheritance = Prototype Chaining
+
+//------------------------------------
+console.log(spacer);
+//------------------------------------
+
+// Ch6. Object Patterns
+
