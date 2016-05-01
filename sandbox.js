@@ -425,4 +425,4 @@ laptop.addListener("modelsaid", function(event){
     console.log("Fired to modelsaid event for: " + event.model);
 })
 
-//console.log(laptop.sayModel());
+console.log(laptop.sayModel());
