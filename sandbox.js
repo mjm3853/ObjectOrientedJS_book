@@ -113,7 +113,7 @@ console.log(person2.name);
 console.log(spacer);
 //------------------------------------
 
-//Constructors - function used with new to create an object. 
+//Ch 3. Constructors - function used with new to create an object. 
 //Makes it easy to create similar objects with the same properties and methods
 
 function Person(soundSomeoneMakesWhenTheyCallYou) {
@@ -141,7 +141,7 @@ leonardo.insult();
 console.log(spacer);
 //------------------------------------
 
-//Prototypes!
+//Ch4. Prototypes!
 
 function hasPrototypeProperty(object, name){
     return name in object && !object.hasOwnProperty(name);
@@ -209,7 +209,7 @@ modernFamily.sayHi();
 console.log(spacer);
 //------------------------------------
 
-// Inheritance
+// Ch5. Inheritance
 
 //Naked Object has no prototype chain.
 //Removes naming collision possibilities.
@@ -257,3 +257,149 @@ var testSquare = new Square(5);
 console.log("Test Square: " + JSON.stringify(testSquare));
 
 console.log("Area of Test Square: " + testSquare.getArea());
+
+console.log("Is Square an instance of Rectangle?: " + (testSquare instanceof Rectangle));
+
+//Inheritance = Prototype Chaining
+
+//------------------------------------
+console.log(spacer);
+//------------------------------------
+
+// Ch6. Object Patterns
+
+//Why make a property private? - To manage state without worrying about the value changing without object's knowledge.
+
+//The Module Pattern
+//- To create Singleton Objects with Private Data
+
+var modulePatternObject = (function(){
+   //private data variables
+   
+   return {
+       //public methods and properties
+   } 
+});
+
+var phone = (function() {
+   var cost = 500;
+   
+   return {
+       name: "Nexus-6P",
+       
+       getCost: function() {
+           return cost;
+       },
+       
+       costMore: function(){
+           cost++;
+       }
+   };
+}());
+
+
+console.log("Phone name: " + phone.name);
+
+console.log("Phone cost: $" + phone.getCost());
+
+phone.cost = 600;
+console.log("Phone cost with no change: $" + phone.getCost());
+
+phone.costMore();
+console.log("Phone cost plus one: $" + phone.getCost());
+
+//Revealing Module Pattern - keep variables and functions together
+
+var tv = (function(){
+    var cost = 350;
+    
+    function getCost() {
+        return cost;
+    }
+    
+    function costMore() {
+        cost++;
+    }
+    
+    return {
+        name: "LG-tv",
+        getCost: getCost,
+        costMore: costMore
+    };
+}());
+
+console.log("TV name: " + tv.name);
+
+console.log("TV cost: $" + tv.getCost());
+
+console.log("TV cost plus one: $" + tv.costMore());
+
+//Mixins
+
+function mixin(receiver, supplier){
+    for (var property in supplier){
+        if (supplier.hasOwnProperty(property)){
+            receiver[property] = supplier[property]
+        }
+    }
+    return receiver;
+}
+
+function EventTarget(){
+}
+
+EventTarget.prototype = {
+    constructor: EventTarget,
+    
+    addListener: function(type, listener){
+        if (!this.hasOwnProperty("_listeners")){
+            this._listeners = [];
+        }
+        
+        if (typeof this._listeners[type] == "undefined"){
+            this._listeners[type] = [];
+        }
+        
+        this._listeners[type].push(listener);
+    },
+    
+    fire: function(event){
+        if (!event.target){
+            event.target = this;
+        }
+        
+        if (!event.type){
+            throw new Error("Event object missing 'type' property.");
+        }
+        
+        if (this._listeners && this._listeners[event.type] instanceof Array){
+            var listeners = this._listeners[event.type];
+            for (var i=0, len=listeners.length; i<len; i++){
+                listeners[i].call(this,event);
+            }
+        }
+    },
+    
+    removeListener: function(type, listener){
+        if (this._listeners && this._listeners[type] instanceof Array){
+            var listeners = this._listeners[type];
+            for (var i=0, len=listeners.length; i<len; i++){
+                if (listeners[i] === listener){
+                    listeners.splice(i, 1);
+                    break;
+                }
+            }
+        }
+    }
+};
+
+var target = new EventTarget();
+target.addListener("message", function(event){
+   console.log("Message is " + event.data); 
+})
+
+target.fire({
+    type: "message",
+    data: "Hello World!"
+});
+
