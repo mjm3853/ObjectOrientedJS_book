@@ -403,3 +403,26 @@ target.fire({
     data: "Hello World!"
 });
 
+//----------------------
+
+function Laptop(model){
+    this.model = model;
+}
+
+mixin(Laptop.prototype, EventTarget.prototype);
+mixin(Laptop.prototype, {
+    constructor: Laptop,
+    
+    sayModel: function(){
+        console.log(this.model);
+        this.fire({type: "modelsaid", model: this.model})
+    }
+});
+
+var laptop = new Laptop("Dell-XPS13");
+
+laptop.addListener("modelsaid", function(event){
+    console.log("Fired to modelsaid event for: " + event.model);
+})
+
+//console.log(laptop.sayModel());
